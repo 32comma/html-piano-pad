@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Piano Pad</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.39/Tone.js">
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+        }
+
+        .key {
+            width: 100px;
+            height: 100px;
+            display: inline-block;
+        }
+
+        .animation {
+            animation: frame_white 0.5s infinite;
+        }
+
+        @keyframes frame_white {
+            0% {}
+
+            50% {
+                background-color: white;
+                margin-top: 1rem;
+                margin-bottom: -1rem;
+            }
+
+            100% {}
+        }
+
+
+        #main,
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            height: 100%;
+        }
+
+        .red {
+            background-color: #ff0000;
+
+        }
+
+        .orange {
+            background-color: #ffa500;
+        }
+
+        .blue {
+            background-color: #0000ff;
+        }
+
+        .yellow {
+            background-color: #ffff00;
+        }
+
+        .chartreuse {
+            background-color: #7fff00;
+        }
+
+        .green {
+            background-color: #008000;
+        }
+
+        .cyan {
+            background-color: #00ffff;
+        }
+
+        .purple {
+            background-color: #800080;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+
+    </div>
+    <script>
+        const now = Tone.now();
+        var colors = ['red', 'orange', 'yellow', 'chartreuse', 'green', 'cyan', 'purple'];
+        var keyNotes = ['c', 'd', 'e', 'f', 'g', 'a', 'b'];
+        var keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '\n', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '\n', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', '\n', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
+        var keyIndex = 0;
+        var keyMap = new Map();
+        class PianoButton {
+            constructor(key, keyNote, color) {
+                this.key = key;
+                this.html = `
+                    <div id="${keyNote}" class='key ${color}'>
+                     
+                    </div>
+                `;
+                console.log(this.html);
+            }
+        }
+        var main = document.getElementById('main');
+
+        for (j = 2; j <= 7; j++) {
+            for (var i = 0; i < keyNotes.length && keyIndex < keys.length; i++) {
+                if (keys[keyIndex] == '\n') {
+                    main.innerHTML += `</div><div class='row'>`;
+                } else {
+                    keyMap.set(keys[keyIndex], keyNotes[i] + j);
+                    var pianoButton = new PianoButton(keys[keyIndex], keyNotes[i] + j, colors[keyIndex % colors.length]);
+                    main.innerHTML += pianoButton.html;
+                }
+                keyIndex++;
+                if (keys.length == keyIndex) {
+                    main.innerHTML += `</div>`;
+                }
+            }
+        }
+        console.log(keyMap);
+        document.body.addEventListener('keypress', function (e) {
+            const synth = new Tone.PolySynth(Tone.Synth).toDestination();
+            synth.triggerAttackRelease(keyMap.get(e.key), '32n');
+            var target = keyMap.get(e.key);
+            var buttonElement = document.getElementById(target);
+            console.log(buttonElement);
+            buttonElement.classList.add('animation');
+            buttonElement.classList.add('animation');
+            setTimeout(function (e) {
+                buttonElement.classList.remove('animation');
+            }, 500)
+        });
+    </script>
+
+</body>
+
+</html>
