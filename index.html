@@ -42,6 +42,8 @@
             width: 30px;
             height: 30px;
             display: inline-block;
+            text-align: center;
+            
         }
 
         .animation {
@@ -53,8 +55,6 @@
 
             50% {
                 background-color: white;
-                margin-top: 1rem;
-                margin-bottom: -1rem;
             }
 
             100% {}
@@ -180,6 +180,7 @@
                 this.key = key;
                 this.html = `
                     <div id="${keyNote}" class='key ${color}'>
+                        ${key}
                     </div>
                 `;
                 console.log(this.html);
