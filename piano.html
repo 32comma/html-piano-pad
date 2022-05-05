@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border-collapse: collapse;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .line {
+            position: relative;
+            width: 40px;
+            height: 100%;
+            display: inline-block;
+            border: 1px solid gray;
+        }
+
+        .key {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            top: 100%;
+            background-color: black;
+            border: 1px solid black;
+            animation-duration: 3s;
+            animation-name: slidedown;
+            position: absolute;
+        }
+
+        @keyframes slidedown {
+            from {
+                top: 100%;
+                overflow: hidden;
+            }
+
+            to {
+                top: 0%;
+                overflow: hidden;
+
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        var array = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/'];
+        var cnt = 0;
+        var map = new Map();
+        for (var i = 0; i < array.length; i++) {
+            cnt++;
+            map.set(array[i], cnt);
+            document.body.innerHTML += `<div class="line" id="line-${cnt}">
+			</div>`;
+        }
+        cnt = 0;
+
+        document.body.addEventListener('keypress', function (e) {
+            var line = document.getElementById(`line-${map.get(e.key)}`);
+            line.innerHTML += `<div class='key' id='key-${map.get(e.key)}'>*</line>`;
+        });
+
+
+    </script>
+</body>
+
+</html>
