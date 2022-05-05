@@ -20,7 +20,7 @@
         }
 
 
-        #load {
+        #play {
             background-color: white;
             position: absolute;
             top: 100px;
@@ -29,7 +29,7 @@
             height: 100px;
         }
 
-        #save {
+        #stop {
             background-color: white;
             position: absolute;
             top: 0;
@@ -67,6 +67,10 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
+        }
+
+        #main {
+            padding: 1rem;
         }
 
         body {
@@ -110,7 +114,7 @@
             color: white;
             top: 4rem;
             left: 2rem;
-            width: 400px;
+            width: 800px;
             height: auto;
             font-size: xx-large;
             position: absolute;
@@ -157,11 +161,11 @@
     <div id="main">
 
     </div>
-    <button id="load" onclick="load()">
-        load
+    <button id="play" onclick="play()">
+        play
     </button>
-    <button id="save" onclick="save()">
-        save
+    <button id="stop" onclick="stop()">
+        stop
     </button>
     <script>
         const now = Tone.now();
@@ -205,22 +209,39 @@
                 info.innerHTML = `<div>${keyMap.get(e.key)}</div><div>${e.key}</div>`;
                 console.log(e.key);
                 sheet.innerHTML += `${e.key}`;
-                synth.triggerAttackRelease(keyMap.get(e.key), '32n');
+                synth.triggerAttackRelease(keyMap.get(e.key), '16n');
             } catch (exception) {
                 sheet.innerHTML += ` `;
             }
 
         });
-        function save() {
+        function stop() {
             var sheet = document.getElementById('sheet');
             var result = prompt(sheet.innerHTML.trim(), sheet.innerHTML.trim());
         }
-        function load() {
-            var result = prompt('tuoash tuoash ruoash ruoash euoash euoash');
-
+        var pIndex = 0;
+        var pfx = 0;
+        function play() {
+            const synth = new Tone.PolySynth(Tone.Synth).toDestination();
             var sheet = document.getElementById('sheet');
-            sheet.innerHTML = result;
+            var result = sheet.innerHTML;
+            console.log(result.trim());
+            pfx = setInterval(function (e) {
+                console.log(result.charAt(pIndex));
+                var key = keyMap.get(result.charAt(pIndex));
+                console.log(key);
+                synth.triggerAttackRelease(key, '16n');
+                pIndex++;
+            }, 100);
         }
+        function stop() {
+            clearInterval(pfx);
+        }
+    </script>
+    <script>
+        setInterval(function (e) {
+            sheet.innerHTML += ' ';
+        }, 1000);
     </script>
 </body>
 
