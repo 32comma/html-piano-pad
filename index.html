@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cute+Font&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTML Piano Pad</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.39/Tone.js">
@@ -13,11 +16,21 @@
             margin: 0;
             padding: 0;
             background-color: black;
+            font-family: 'Cute Font';
+        }
+
+        #save {
+            background-color: white;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
         }
 
         .key {
             width: 30px;
-            height:30px;
+            height: 30px;
             display: inline-block;
         }
 
@@ -82,18 +95,55 @@
         .purple {
             background-color: #800080;
         }
+
+        #sheet {
+            color: white;
+            top: 4rem;
+            left: 2rem;
+            width: 400px;
+            height: auto;
+            font-size: xx-large;
+            position: absolute;
+        }
+
+        .sequence {
+            display: inline-block;
+            height: 1rem;
+            width: 1rem;
+
+        }
+
+        #info {
+            color: white;
+            top: 2rem;
+            right: 2rem;
+            width: 200px;
+            height: 200px;
+            font-size: xx-large;
+            position: absolute;
+        }
     </style>
 </head>
 
 <body>
+
+    <div id="info">
+
+    </div>
+    <div id="sheet">
+
+    </div>
     <div id="main">
 
     </div>
+    <button id="save" onclick="save()">
+        save
+    </button>
     <script>
         const now = Tone.now();
         var colors = ['red', 'orange', 'yellow', 'chartreuse', 'green', 'cyan', 'purple'];
-        var keyNotes = ['c', 'd', 'e', 'f', 'g', 'a', 'b'];
-        var keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0',  'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
+        var keyNotes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+        var keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm'];
         var keyIndex = 0;
         var keyMap = new Map();
         class PianoButton {
@@ -117,19 +167,31 @@
         }
         console.log(keyMap);
         document.body.addEventListener('keypress', function (e) {
-            const synth = new Tone.PolySynth(Tone.Synth).toDestination();
-            synth.triggerAttackRelease(keyMap.get(e.key), '32n');
             var target = keyMap.get(e.key);
             var buttonElement = document.getElementById(target);
-            console.log(buttonElement);
-            buttonElement.classList.add('animation');
-            buttonElement.classList.add('animation');
-            setTimeout(function (e) {
-                buttonElement.classList.remove('animation');
-            }, 500)
-        });
-    </script>
+            var info = document.getElementById('info');
+            var sheet = document.getElementById('sheet');
+            try {
+                const synth = new Tone.PolySynth(Tone.Synth).toDestination();
+                console.log(buttonElement);
+                buttonElement.classList.add('animation');
+                setTimeout(function (e) {
+                    buttonElement.classList.remove('animation');
+                }, 500);
+                info.innerHTML = `<div>${keyMap.get(e.key)}</div><div>${e.key}</div>`;
+                console.log(e.key);
+                sheet.innerHTML += `${e.key}`;
+                synth.triggerAttackRelease(keyMap.get(e.key), '32n');
+            } catch (exception) {
+                sheet.innerHTML += `<br/>`;
+            }
 
+        });
+        function save() {
+            var sheet = document.getElementById('sheet');
+            alert(sheet.innerHTML);
+        }
+    </script>
 </body>
 
 </html>
