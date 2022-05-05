@@ -19,6 +19,16 @@
             font-family: 'Cute Font';
         }
 
+
+        #load {
+            background-color: white;
+            position: absolute;
+            top: 100px;
+            right: 0;
+            width: 100px;
+            height: 100px;
+        }
+
         #save {
             background-color: white;
             position: absolute;
@@ -136,6 +146,9 @@
     <div id="main">
 
     </div>
+    <button id="load" onclick="load()">
+        load
+    </button>
     <button id="save" onclick="save()">
         save
     </button>
@@ -183,13 +196,19 @@
                 sheet.innerHTML += `${e.key}`;
                 synth.triggerAttackRelease(keyMap.get(e.key), '32n');
             } catch (exception) {
-                sheet.innerHTML += `<br/>`;
+                sheet.innerHTML += ` `;
             }
 
         });
         function save() {
             var sheet = document.getElementById('sheet');
-            alert(sheet.innerHTML);
+            var result = prompt(sheet.innerHTML.trim(),sheet.innerHTML.trim());
+        }
+        function load() {
+            var result = prompt('tuoash tuoash ruoash ruoash euoash euoash');
+
+            var sheet = document.getElementById('sheet');
+            sheet.innerHTML = result;
         }
     </script>
 </body>
