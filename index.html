@@ -231,10 +231,10 @@
                 console.log(result.charAt(pIndex));
                 var key = keyMap.get(result.charAt(pIndex));
                 console.log(key);
-                synth.triggerAttackRelease(key, '16n');
+                synth.triggerAttackRelease(key, '8n');
                 var buttonElement = document.getElementById(key);
                 pIndex++;
-            }, 1000/8);
+            }, 1000 / 8);
         }
         function stop() {
             clearInterval(pfx);
