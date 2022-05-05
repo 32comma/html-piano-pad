@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>blk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cute+Font&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #target {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .row {
+            width: 1000%;
+            overflow: hidden;
+        }
+
+        html,
+        body {
+            font-family: 'Cute Font';
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: black;
+        }
+
+        .grk {
+            border: 1px solid darkgreen;
+            animation: grk 3s infinite;
+        }
+
+        .grk {
+            border: 1px solid darkgreen;
+            animation: grk 3s infinite;
+        }
+
+        .pp {
+            border: 1px solid purple;
+            animation: pp 3s infinite;
+        }
+
+        .pk {
+            border: 1px solid palevioletred;
+            animation: pk 3s infinite;
+        }
+
+        .ok {
+            border: 1px solid darkorange;
+            animation: ok 3s infinite;
+        }
+
+        .rk {
+            border: 1px solid palevioletred;
+            animation: rk 3s infinite;
+        }
+
+        .gdk {
+            border: 1px solid darkgoldenrod;
+            animation: gdk 3s infinite;
+        }
+
+        .blk {
+            border: 1px solid darkblue;
+            animation: blk 3s infinite;
+        }
+
+        .button:hover {
+            filter: invert(1);
+        }
+
+        .button {
+            line-height: 50px;
+            text-align: center;
+            position: relative;
+            margin: 10px;
+            width: 50px;
+            height: 50px;
+            display: inline-block;
+            animation-direction: normal;
+        }
+
+
+
+        @keyframes blk {
+            0% {
+                background-color: darkblue;
+                color: skyblue;
+                border: 1px solid skyblue;
+            }
+
+            50% {
+                color: skyblue;
+                background-color: black;
+                border: 1px solid darkblue;
+            }
+
+            100% {
+                background-color: darkblue;
+                color: skyblue;
+                border: 1px solid skyblue;
+            }
+        }
+
+        @keyframes gdk {
+            0% {
+                background-color: darkgoldenrod;
+                color: gold;
+                border: 1px solid gold;
+            }
+
+            50% {
+                color: gold;
+                background-color: black;
+                border: 1px solid darkgoldenrod;
+            }
+
+            100% {
+                background-color: darkgoldenrod;
+                color: gold;
+                border: 1px solid gold;
+            }
+        }
+
+        @keyframes grk {
+            0% {
+                background-color: darkgreen;
+                color: chartreuse;
+                border: 1px solid chartreuse;
+            }
+
+            50% {
+                color: chartreuse;
+                background-color: black;
+                border: 1px solid darkgreen;
+            }
+
+            100% {
+                background-color: darkgreen;
+                color: chartreuse;
+                border: 1px solid chartreuse;
+            }
+        }
+
+        @keyframes pk {
+            0% {
+                background-color: palevioletred;
+                color: pink;
+                border: 1px solid pink;
+            }
+
+            50% {
+                color: pink;
+                background-color: black;
+                border: 1px solid palevioletred;
+            }
+
+            100% {
+                background-color: palevioletred;
+                color: pink;
+                border: 1px solid pink;
+            }
+        }
+
+        @keyframes pp {
+            0% {
+                background-color: purple;
+                color: lightpink;
+                border: 1px solid lightpink;
+            }
+
+            50% {
+                color: lightpink;
+                background-color: black;
+                border: 1px solid purple;
+            }
+
+            100% {
+                background-color: purple;
+                color: lightpink;
+                border: 1px solid lightpink;
+            }
+        }
+
+        @keyframes rk {
+            0% {
+                background-color: darkred;
+                color: red;
+                border: 1px solid red;
+            }
+
+            50% {
+                color: red;
+                background-color: black;
+                border: 1px solid darkred;
+            }
+
+            100% {
+                background-color: darkred;
+                color: red;
+                border: 1px solid red;
+            }
+        }
+
+        @keyframes ok {
+            0% {
+                background-color: darkorange;
+                color: orange;
+                border: 1px solid orange;
+            }
+
+            50% {
+                color: orange;
+                background-color: black;
+                border: 1px solid darkorange;
+            }
+
+            100% {
+                background-color: darkorange;
+                color: orange;
+                border: 1px solid orange;
+            }
+        }
+        #frame{
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="target">
+    </div>
+    <script>
+        var target = document.getElementById('target');
+        var html = "";
+        for (var i = 0; i < 20; i++) {
+            html += `<div class="row">`;
+            for (var j = 0; j < 3; j++) {
+                html += `
+                    <div class="rk button">&nbsp;</div>
+                    <div class="ok button">&nbsp;</div>
+                    <div class="gdk button">&nbsp;</div>
+                    <div class="grk button">&nbsp;</div>
+                    <div class="blk button">&nbsp;</div>
+                    <div class="pk button">&nbsp;</div>
+                    <div class="pp button">&nbsp;</div>
+            `;
+            }
+            html += `<div class="row">`;
+        }
+        target.innerHTML = html;
+    </script>
+</body>
+
+</html>
