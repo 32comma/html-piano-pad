@@ -16,8 +16,8 @@
         }
 
         .key {
-            width: 100px;
-            height: 100px;
+            width: 30px;
+            height:30px;
             display: inline-block;
         }
 
@@ -101,27 +101,18 @@
                 this.key = key;
                 this.html = `
                     <div id="${keyNote}" class='key ${color}'>
-                     
                     </div>
                 `;
                 console.log(this.html);
             }
         }
         var main = document.getElementById('main');
-
         for (j = 2; j <= 7; j++) {
             for (var i = 0; i < keyNotes.length && keyIndex < keys.length; i++) {
-                if (keys[keyIndex] == '\n') {
-                    main.innerHTML += `</div><div class='row'>`;
-                } else {
-                    keyMap.set(keys[keyIndex], keyNotes[i] + j);
-                    var pianoButton = new PianoButton(keys[keyIndex], keyNotes[i] + j, colors[keyIndex % colors.length]);
-                    main.innerHTML += pianoButton.html;
-                }
+                keyMap.set(keys[keyIndex], keyNotes[i] + j);
+                var pianoButton = new PianoButton(keys[keyIndex], keyNotes[i] + j, colors[keyIndex % colors.length]);
+                main.innerHTML += pianoButton.html;
                 keyIndex++;
-                if (keys.length == keyIndex) {
-                    main.innerHTML += `</div>`;
-                }
             }
         }
         console.log(keyMap);
