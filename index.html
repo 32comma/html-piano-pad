@@ -21,24 +21,6 @@
         }
 
 
-        #play {
-            background-color: white;
-            position: absolute;
-            top: 100px;
-            right: 0;
-            width: 100px;
-            height: 100px;
-        }
-
-        #stop {
-            background-color: white;
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px;
-            height: 100px;
-        }
-
         .key {
             width: 30px;
             height: 200px;
@@ -140,16 +122,6 @@
             width: 1rem;
 
         }
-
-        #info {
-            color: white;
-            top: 2rem;
-            right: 2rem;
-            width: 200px;
-            height: 200px;
-            font-size: xx-large;
-            position: absolute;
-        }
     </style>
 </head>
 
@@ -164,12 +136,6 @@
     <div id="main">
 
     </div>
-    <button id="play" onclick="play()">
-        play
-    </button>
-    <button id="stop" onclick="stop()">
-        stop
-    </button>
     <script>
         const synth = new Tone.PolySynth(Tone.Synth).toDestination();
         const now = Tone.now();
@@ -220,29 +186,7 @@
             }
 
         });
-        function stop() {
-            var sheet = document.getElementById('sheet');
-            var result = prompt(sheet.innerHTML.trim(), sheet.innerHTML.trim());
-        }
-        var pIndex = 0;
-        var pfx = 0;
-        function play() {
-
-            var sheet = document.getElementById('sheet');
-            var result = sheet.innerHTML;
-            console.log(result.trim());
-            pfx = setInterval(function (e) {
-                console.log(result.charAt(pIndex));
-                var key = keyMap.get(result.charAt(pIndex));
-                console.log(key);
-                synth.triggerAttackRelease(key, '32n');
-                var buttonElement = document.getElementById(key);
-                pIndex++;
-            }, 1000 / 8);
-        }
-        function stop() {
-            clearInterval(pfx);
-        }
+        
     </script>
     <script>
         setInterval(function (e) {
